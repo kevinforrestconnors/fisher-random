@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+
+<title>Chess 960</title>
+  
+<link rel="stylesheet" href="styles.css">
+<link href='https://fonts.googleapis.com/css?family=Lato:400,100|Slabo+27px' rel='stylesheet' type='text/css'>
+
+<div class="s-top">
+
+  <header class="page-header">
+    <h1>Chess 960 Generator</h1>
+    <h2>1/960</h2>
+  </header>
+
+</div>
+
+<section class="main-content">
+
+  <div class="desc">
+    <div class="desc-p">
+      Chess 960, or Fischer Random Chess, is a chess variant where the back row is randomized at the start.  There are two other constraints to the initial game state:
+
+      * The King is placed on a square between the two rooks
+      * The Bishops are placed on opposite colors
+      
+      This results in (eponymously) 960 board possibilities for the starting state.
+
+      Aside from the initial conditions, there are modified rules for castling for which I'll refer you to the <a href="https://en.wikipedia.org/wiki/Chess960">Wikipedia Page</a>. 
+
+      Use the buttons below to generate valid Chess 960 game boards faster than rolling dice!
+    </div>
+    <div class="desc-controls">
+      <button class="desc-p-shown">Hide Explanation</button>
+    </div>
+  </div>
+
+  <div class="canvas-container">
+    <canvas id="main-canvas" width="160" height="160"></canvas>  
+  </div>
+
+</section>
+
+<div class="s-bottom">
+
+  <footer>
+    <div>social media:</div>
+    <a class="twitter" target="_blank" href="https://twitter.com/kevinfconnors">@kevinfconnors</a>
+    <a class="github" target="_blank" href="https://github.com/kevinforrestconnors">github</a>
+    <a class="linkedin" target="_blank" href="https://www.linkedin.com/in/kevin-connors-701a04a4">linkedin</a>
+  </footer>
+
+</div>
+
+<script src="underscore.js"></script>
+<script src="fischer.js"></script>

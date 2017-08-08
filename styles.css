@@ -1,0 +1,31 @@
+.page-header {
+	text-align: center;
+}
+
+h1 {
+  margin: 0 0 0 0;
+  font-size: 2.747em;
+  font-family: 'Lato', serif;
+}
+h2 {
+  margin: 0 0 0 0;
+  font-size: 0.874em;
+  font-family: 'Lato', serif;
+}
+
+.controls {
+	width: 80%;
+	height: 100px;
+	margin: 0 auto;
+}
+
+.canvas-container {
+	width: 80%;
+	height: 400px;
+	margin: 0 auto;
+}
+
+#main-canvas {
+	border: 1px solid red;
+	margin: 0 auto;
+}
