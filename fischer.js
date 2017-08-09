@@ -12,7 +12,7 @@
         backRowPieces: ['b', 'b', 'k', 'n', 'n', 'q', 'r', 'r'],
         assets: ['bb', 'bk', 'bn', 'bp', 'bq', 'br', 'wb', 'wk', 'wn', 'wp', 'wq', 'wr'],
         assetsPrefix: 'assets/',
-        assetsSuffix: '.png',
+        assetsSuffix: '.png'
     }
 
     var permArr = [],
@@ -48,6 +48,44 @@
     var canvasX = 0;
     var canvasY = 0;
     var pieceOptions = _.clone(GLOBALS.backRowPieces);
+    var chess960Possibilities = [];
+
+    if (!localStorage.getItem("chess960localStorage")) {
+
+        var allPossibilities = permute(GLOBALS.backRowPieces);
+
+        var chess960PossibilitiesWithReps = _.sortBy(_.filter(allPossibilities, function(s) {
+
+            var r1Index = _.indexOf(s, 'r');
+            var r2Index = _.lastIndexOf(s, 'r');
+
+            var kIndex = _.indexOf(s, 'k');
+
+            var b1Index = _.indexOf(s, 'b');
+            var b2Index = _.lastIndexOf(s, 'b');
+
+            // King between Rooks && Bishops on different colors
+            return (r1Index < r2Index && kIndex > r1Index && kIndex < r2Index) && (b1Index + b2Index) % 2 == 1;
+        }));
+
+        for (var i = 0; i < 7680; i += 8) {
+            chess960Possibilities.push(chess960PossibilitiesWithReps[i]);
+        }
+
+        localStorage.setItem("chess960localStorage", JSON.stringify(chess960Possibilities))
+
+    } else {
+
+        chess960Possibilities = JSON.parse(localStorage.getItem("chess960localStorage"));
+    }
+
+    var numSelected = _.random(0, chess960Possibilities.length);
+    var selectedPossibility = chess960Possibilities[numSelected];
+
+    console.log(numSelected)
+    document.getElementById("num-of-initial-state").innerHTML = numSelected;
+
+    console.log(selectedPossibility);
 
     // Draws 8 Pawns on each side
     _(8).times(function(i) {
@@ -58,36 +96,7 @@
         drawTile('wp', canvasX, canvasY)
     });
 
-    var allPossibilities = permute(GLOBALS.backRowPieces);
-
-    var chess960PossibilitiesWithReps = _.sortBy(_.filter(allPossibilities, function(s) {
-
-        var r1Index = _.indexOf(s, 'r');
-        var r2Index = _.lastIndexOf(s, 'r');
-
-        var kIndex = _.indexOf(s, 'k');
-
-        var b1Index = _.indexOf(s, 'b');
-        var b2Index = _.lastIndexOf(s, 'b');
-
-        // King between Rooks && Bishops on different colors
-        return (r1Index < r2Index && kIndex > r1Index && kIndex < r2Index) && (b1Index + b2Index) % 2 == 1;
-    }));
-
-    var chess960Possibilities = [];
-
-    for (var i = 0; i < 7680; i += 8) {
-        chess960Possibilities.push(chess960PossibilitiesWithReps[i]);
-    }
-    
-    var numSelected = 203//_.random(0, chess960Possibilities.length);
-    var selectedPossibility = chess960Possibilities[numSelected];
-
-    console.log(numSelected)
-    document.getElementById("num-of-initial-state").innerHTML = numSelected;
-
-    console.log(selectedPossibility);
-
+    // Draws the rest of the pieces
     for (var i = 0; i < 8; i++) {
         canvasX = GLOBALS.imageWidth * i;
         canvasY = 0;
