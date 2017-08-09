@@ -28,4 +28,6 @@ h2 {
 #main-canvas {
 	border: 1px solid red;
 	margin: 0 auto;
+	width: 320px;
+	height: 320px;
 }
