@@ -1,9 +1,9 @@
-(function() {
+var chess960 = (function() {
 
     "use strict";
 
-    var c = document.getElementById("main-canvas");
-    var ctx = c.getContext("2d");
+    var canvas = document.getElementById("main-canvas");
+    var ctx = canvas.getContext("2d");
     ctx.moveTo(0,0);
 
     var GLOBALS = {
@@ -79,31 +79,40 @@
         chess960Possibilities = JSON.parse(localStorage.getItem("chess960localStorage"));
     }
 
-    var numSelected = _.random(0, chess960Possibilities.length);
-    var selectedPossibility = chess960Possibilities[numSelected];
+    function chess960() {
 
-    console.log(numSelected)
-    document.getElementById("num-of-initial-state").innerHTML = numSelected;
+        var numSelected = _.random(0, chess960Possibilities.length);
+        var selectedPossibility = chess960Possibilities[numSelected];
 
-    console.log(selectedPossibility);
+        document.getElementById("num-of-initial-state").innerHTML = numSelected;
 
-    // Draws 8 Pawns on each side
-    _(8).times(function(i) {
-        canvasX = GLOBALS.imageWidth * i;
-        canvasY = GLOBALS.imageHeight;
-        drawTile('bp', canvasX, canvasY)
-        canvasY = GLOBALS.imageHeight * 6;
-        drawTile('wp', canvasX, canvasY)
-    });
+        //console.log(selectedPossibility);
 
-    // Draws the rest of the pieces
-    for (var i = 0; i < 8; i++) {
-        canvasX = GLOBALS.imageWidth * i;
-        canvasY = 0;
-        drawTile('b' + selectedPossibility[i], canvasX, canvasY);
-        canvasY = GLOBALS.imageHeight * 7;
-        drawTile('w' + selectedPossibility[i], canvasX, canvasY);
+        // Clear the canvas
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // Draws 8 Pawns on each side
+        _(8).times(function(i) {
+            canvasX = GLOBALS.imageWidth * i;
+            canvasY = GLOBALS.imageHeight;
+            drawTile('bp', canvasX, canvasY)
+            canvasY = GLOBALS.imageHeight * 6;
+            drawTile('wp', canvasX, canvasY)
+        });
+
+        // Draws the rest of the pieces
+        for (var i = 0; i < 8; i++) {
+            canvasX = GLOBALS.imageWidth * i;
+            canvasY = 0;
+            drawTile('b' + selectedPossibility[i], canvasX, canvasY);
+            canvasY = GLOBALS.imageHeight * 7;
+            drawTile('w' + selectedPossibility[i], canvasX, canvasY);
+        }
     }
+
+    chess960();
+
+    return chess960;
 
 })();
 
