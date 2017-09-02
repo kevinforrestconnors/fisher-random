@@ -44,25 +44,35 @@ h2 {
 
 .desc-p {
 	text-indent: 10px;
-	margin: 10px 5px;
+	margin-top: 20px;
 }
 
 .desc-ul {
 	padding: 0;
-	margin-bottom: 10px;
+	margin-top: 20px;
 }
 
 .desc-li {
 	list-style: none;
 }
 
-.controls {
-	height: 100px;
-	margin: 0 auto;
+.btn {
+	background: #464646;
+	background-image: linear-gradient(to bottom, #464646, #1e1e1e);
+	border-radius: 28px; 
+	font-family: Arial; 
+	color: #ffffff; 
+	font-size: 14px; 
+	padding: 7px 15px 7px 15px; 
+	text-decoration: none;
+	margin: 20px 0 0 10px;
+	text-align: center;
 }
 
-#new-config-button {
-	
+.btn:hover {
+  background: #6e6e6e;
+  background-image: linear-gradient(to bottom, #6e6e6e, #464646);
+  text-decoration: none;
 }
 
 .chessboard-container {
